@@ -1,6 +1,6 @@
 name: dart_json_predicate
 description: An implementation of the JSON predicate proposal
-version: 1.1.0
+version: 1.1.1
 author: Andreas Reiter <andreas.reiter@iaik.tugraz.at>
 homepage: https://github.com/areiter/dart-json-predicate
 

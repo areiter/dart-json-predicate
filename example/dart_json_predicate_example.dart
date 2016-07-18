@@ -52,6 +52,5 @@ main() {
     'path' : '/level1_0',
     'value' : '[\\w\\s]*'
   }, debug: true);
-
   print(result);
 }

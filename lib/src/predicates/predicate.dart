@@ -120,7 +120,7 @@ abstract class SecondOrderPredicate extends Predicate{
     _validatePredicate();
 
     for(var subJsonPredicate in jsonPredicate['apply']){
-      predicates.add(new Predicate.fromJson(subJsonPredicate));
+      predicates.add(new Predicate.fromJson(subJsonPredicate, debug: debug));
     }
   }
 
