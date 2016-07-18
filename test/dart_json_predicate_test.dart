@@ -3,8 +3,13 @@
 
 import 'package:dart_json_predicate/json_predicate.dart';
 import 'package:test/test.dart';
+import 'package:logging/logging.dart';
 
 void main() {
+  Logger.root.level = Level.FINEST;
+  Logger.root.onRecord.listen((LogRecord rec) {
+    print('[${rec.loggerName}] ${rec.level.name}: ${rec.time}: ${rec.message}');
+  });
 
   var testDocument = {
     "level1_0" : "This 123 is a string value",
@@ -113,7 +118,7 @@ void main() {
             ]
           }
         ]
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -148,7 +153,7 @@ void main() {
             ]
           }
         ]
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -183,7 +188,7 @@ void main() {
             ]
           }
         ]
-      });
+      }, debug: true);
       expect(result, false);
     });
   });
@@ -207,7 +212,7 @@ void main() {
             'value' : 10
           }
         ]
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -226,7 +231,7 @@ void main() {
             'value' : 3
           }
         ]
-      });
+      }, debug: true);
       expect(result, false);
     });
   });
@@ -249,7 +254,7 @@ void main() {
             'value' : 3
           }
         ]
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -268,7 +273,7 @@ void main() {
             'value' : 3
           }
         ]
-      });
+      }, debug: true);
       expect(result, false);
     });
   });
@@ -291,7 +296,7 @@ void main() {
             'value' : 3
           }
         ]
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -310,7 +315,7 @@ void main() {
             'value' : 3
           }
         ]
-      });
+      }, debug: true);
       expect(result, false);
     });
   });
@@ -324,7 +329,7 @@ void main() {
             'op' : 'contains',
             'path' : '/level1_0',
             'value' : 'a string'
-          });
+          }, debug: true);
       expect(result, true);
     });
 
@@ -333,7 +338,7 @@ void main() {
         'op' : 'contains',
         'path' : '/level1_0_undefined',
         'value' : 'a string'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -342,7 +347,7 @@ void main() {
         'op' : 'contains',
         'path' : '/level1_0',
         'value' : 'a not matching string'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -351,7 +356,7 @@ void main() {
         'op' : 'contains',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_0',
         'value' : 'another string'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -360,7 +365,7 @@ void main() {
         'op' : 'contains',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_0',
         'value' : 'another unmatched string'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -369,7 +374,7 @@ void main() {
         'op' : 'contains',
         'path' : '/level1_c1/level2c1_0/level3c_undefined_10/level4c0_0',
         'value' : 'another unmatched string'
-      });
+      }, debug: true);
       expect(result, false);
     });
   });
@@ -382,7 +387,7 @@ void main() {
         'op' : 'matches',
         'path' : '/level1_0',
         'value' : '[\\w\\s]*'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -391,7 +396,7 @@ void main() {
         'op' : 'matches',
         'path' : '/level1_0_undefined',
         'value' : '^[\\w\\s]*\$'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -400,7 +405,7 @@ void main() {
         'op' : 'matches',
         'path' : '/level1_0',
         'value' : '^[\\s[A-Z][a-z]]*\$'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -409,7 +414,7 @@ void main() {
         'op' : 'matches',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_0',
         'value' : '^[\\w\\s]*\$'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -418,7 +423,7 @@ void main() {
         'op' : 'matches',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_0',
         'value' : '^[0-9]*\$'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -427,7 +432,7 @@ void main() {
         'op' : 'matches',
         'path' : '/level1_c1/level2c1_0/level3c_undefined_10/level4c0_0',
         'value' : '[\\w\\s]*'
-      });
+      }, debug: true);
       expect(result, false);
     });
   });
@@ -440,7 +445,7 @@ void main() {
         'op' : 'ends',
         'path' : '/level1_0',
         'value' : 'a string value'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -449,7 +454,7 @@ void main() {
         'op' : 'ends',
         'path' : '/level1_0_undefined',
         'value' : 'a string value'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -458,7 +463,7 @@ void main() {
         'op' : 'ends',
         'path' : '/level1_0',
         'value' : 'a not matching string'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -467,7 +472,7 @@ void main() {
         'op' : 'ends',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_0',
         'value' : 'another string value'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -476,7 +481,7 @@ void main() {
         'op' : 'ends',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_0',
         'value' : 'another unmatched string'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -485,7 +490,7 @@ void main() {
         'op' : 'ends',
         'path' : '/level1_c1/level2c1_0/level3c_undefined_10/level4c0_0',
         'value' : 'another unmatched string'
-      });
+      }, debug: true);
       expect(result, false);
     });
   });
@@ -498,7 +503,7 @@ void main() {
         'op' : 'test',
         'path' : '/level1_0',
         'value' : 'This 123 is a string value'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -507,7 +512,7 @@ void main() {
         'op' : 'test',
         'path' : '/level1_0_undefined',
         'value' : 'a string value'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -516,7 +521,7 @@ void main() {
         'op' : 'test',
         'path' : '/level1_0',
         'value' : 'a not matching string'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -525,7 +530,7 @@ void main() {
         'op' : 'test',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_0',
         'value' : 'This 123 is another string value'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -534,7 +539,7 @@ void main() {
         'op' : 'ends',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_0',
         'value' : 'another unmatched string'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -543,7 +548,7 @@ void main() {
         'op' : 'ends',
         'path' : '/level1_c1/level2c1_0/level3c_undefined_10/level4c0_0',
         'value' : 'another unmatched string'
-      });
+      }, debug: true);
       expect(result, false);
     });
   });
@@ -556,7 +561,7 @@ void main() {
         'op' : 'type',
         'path' : '/level1_0',
         'value' : 'string'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -565,7 +570,7 @@ void main() {
         'op' : 'type',
         'path' : '/level1_1',
         'value' : 'number'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -574,7 +579,7 @@ void main() {
         'op' : 'type',
         'path' : '/level1_3',
         'value' : 'number'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -583,7 +588,7 @@ void main() {
         'op' : 'type',
         'path' : '/level1_8',
         'value' : 'null'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -592,7 +597,7 @@ void main() {
         'op' : 'type',
         'path' : '/level1_9',
         'value' : 'boolean'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -601,7 +606,7 @@ void main() {
         'op' : 'type',
         'path' : '/level1_6',
         'value' : 'array'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -610,7 +615,7 @@ void main() {
         'op' : 'type',
         'path' : '/level1_0_undefined',
         'value' : 'string'
-      });
+      }, debug: true);
       expect(result, false);
     });
   });
@@ -623,7 +628,7 @@ void main() {
         'op' : 'starts',
         'path' : '/level1_0',
         'value' : 'This 123 is'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -632,7 +637,7 @@ void main() {
         'op' : 'starts',
         'path' : '/level1_0_undefined',
         'value' : 'a string value'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -641,7 +646,7 @@ void main() {
         'op' : 'starts',
         'path' : '/level1_0',
         'value' : 'a not matching string'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -650,7 +655,7 @@ void main() {
         'op' : 'starts',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_0',
         'value' : 'This 123 is another'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -659,7 +664,7 @@ void main() {
         'op' : 'starts',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_0',
         'value' : 'another unmatched string'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -668,7 +673,7 @@ void main() {
         'op' : 'starts',
         'path' : '/level1_c1/level2c1_0/level3c_undefined_10/level4c0_0',
         'value' : 'another unmatched string'
-      });
+      }, debug: true);
       expect(result, false);
     });
   });
@@ -680,7 +685,7 @@ void main() {
       var result = json(testDocument, {
         'op' : 'defined',
         'path' : '/level1_0'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -688,7 +693,7 @@ void main() {
       var result = json(testDocument, {
         'op' : 'defined',
         'path' : '/level1_undefined_0'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -696,7 +701,7 @@ void main() {
       var result = json(testDocument, {
         'op' : 'defined',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_0',
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -704,7 +709,7 @@ void main() {
       var result = json(testDocument, {
         'op' : 'defined',
         'path' : '/level1_c1/level2c1_0/level3_undefined_c10/level4c0_0'
-      });
+      }, debug: true);
       expect(result, false);
     });
   });
@@ -716,7 +721,7 @@ void main() {
       var result = json(testDocument, {
         'op' : 'undefined',
         'path' : '/level1_0'
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -724,7 +729,7 @@ void main() {
       var result = json(testDocument, {
         'op' : 'undefined',
         'path' : '/level1_undefined_0'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -732,7 +737,7 @@ void main() {
       var result = json(testDocument, {
         'op' : 'undefined',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_0',
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -740,7 +745,7 @@ void main() {
       var result = json(testDocument, {
         'op' : 'undefined',
         'path' : '/level1_c1/level2c1_0/level3_undefined_c10/level4c0_0'
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -748,7 +753,7 @@ void main() {
       var result = json(testDocument, {
         'op' : 'undefined',
         'path' : '/level1_c8'
-      });
+      }, debug: true);
       expect(result, true);
     });
   });
@@ -762,7 +767,7 @@ void main() {
         'op' : 'in',
         'path' : '/level1_0',
         'value' : [1, 2, 3, 1.1, 'string value', 'This 123 is a string value']
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -771,7 +776,7 @@ void main() {
         'op' : 'in',
         'path' : '/level1_0_undefined',
         'value' : [1, 2, 3, 1.1, 'string value', 'This is a string value']
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -780,7 +785,7 @@ void main() {
         'op' : 'in',
         'path' : '/level1_0',
         'value' : [1, 2, 3, 'a not matching string']
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -789,7 +794,7 @@ void main() {
         'op' : 'in',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_1',
         'value' : [1, 2, 3, 'a not matching string', 5, 4]
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -798,7 +803,7 @@ void main() {
         'op' : 'in',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_1',
         'value' : [1, 2, 3, 'a not matching string', 4]
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -807,7 +812,7 @@ void main() {
         'op' : 'in',
         'path' : '/level1_c1/level2c1_0/level3c_undefined_10/level4c0_0',
         'value' : [1, 2, 3, 'a not matching string', 4]
-      });
+      }, debug: true);
       expect(result, false);
     });
   });
@@ -820,7 +825,7 @@ void main() {
         'op' : 'less',
         'path' : '/level1_1',
         'value' : 10
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -829,7 +834,7 @@ void main() {
         'op' : 'less',
         'path' : '/level1_1',
         'value' : 4
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -838,7 +843,7 @@ void main() {
         'op' : 'less',
         'path' : '/level1_2',
         'value' : -2
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -847,7 +852,7 @@ void main() {
         'op' : 'less',
         'path' : '/level1_2',
         'value' : -4
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -856,7 +861,7 @@ void main() {
         'op' : 'less',
         'path' : '/level1_3',
         'value' : 4
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -865,7 +870,7 @@ void main() {
         'op' : 'less',
         'path' : '/level1_3',
         'value' : 3
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -874,7 +879,7 @@ void main() {
         'op' : 'less',
         'path' : '/level1_1',
         'value' : 5.1
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -883,7 +888,7 @@ void main() {
         'op' : 'less',
         'path' : '/level1_1',
         'value' : 4.9
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -892,7 +897,7 @@ void main() {
         'op' : 'less',
         'path' : '/level1_0_undefined',
         'value' : 10
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -901,7 +906,7 @@ void main() {
         'op' : 'less',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_1',
         'value' : 6
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -910,7 +915,7 @@ void main() {
         'op' : 'less',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_1',
         'value' : 4
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -920,7 +925,7 @@ void main() {
         'op' : 'less',
         'path' : '/level1_c1/level2c1_0/level3c_undefined_10/level4c0_0',
         'value' : 10
-      });
+      }, debug: true);
       expect(result, false);
     });
   });
@@ -933,7 +938,7 @@ void main() {
         'op' : 'more',
         'path' : '/level1_1',
         'value' : 10
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -942,7 +947,7 @@ void main() {
         'op' : 'more',
         'path' : '/level1_1',
         'value' : 4
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -951,7 +956,7 @@ void main() {
         'op' : 'more',
         'path' : '/level1_2',
         'value' : -2
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -960,7 +965,7 @@ void main() {
         'op' : 'more',
         'path' : '/level1_2',
         'value' : -4
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -969,7 +974,7 @@ void main() {
         'op' : 'more',
         'path' : '/level1_3',
         'value' : 4
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -978,7 +983,7 @@ void main() {
         'op' : 'more',
         'path' : '/level1_3',
         'value' : 3
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -987,7 +992,7 @@ void main() {
         'op' : 'more',
         'path' : '/level1_1',
         'value' : 5.1
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -996,7 +1001,7 @@ void main() {
         'op' : 'more',
         'path' : '/level1_1',
         'value' : 4.9
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -1005,7 +1010,7 @@ void main() {
         'op' : 'more',
         'path' : '/level1_0_undefined',
         'value' : 10
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -1014,7 +1019,7 @@ void main() {
         'op' : 'more',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_1',
         'value' : 6
-      });
+      }, debug: true);
       expect(result, false);
     });
 
@@ -1023,7 +1028,7 @@ void main() {
         'op' : 'more',
         'path' : '/level1_c1/level2c1_0/level3c10/level4c0_1',
         'value' : 4
-      });
+      }, debug: true);
       expect(result, true);
     });
 
@@ -1033,7 +1038,7 @@ void main() {
         'op' : 'less',
         'path' : '/level1_c1/level2c1_0/level3c_undefined_10/level4c0_0',
         'value' : 10
-      });
+      }, debug: true);
       expect(result, false);
     });
   });

@@ -5,8 +5,8 @@ import 'predicates/predicate.dart';
 
 /// Tests the specified parsed JSON input against the specified parsed predicate
 ///
-bool json(input, predicate){
-  var p = new Predicate.fromJson(predicate);
+bool json(input, predicate, {debug: false}){
+  var p = new Predicate.fromJson(predicate, debug: debug);
 
   return p.json(input)[0];
 }

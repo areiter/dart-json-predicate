@@ -2,6 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:dart_json_predicate/json_predicate.dart' as jpredicate;
+import 'package:logging/logging.dart';
 
 var testDocument = {
   "level1_0" : "This is a string value",
@@ -41,11 +42,16 @@ var testDocument = {
 };
 
 main() {
+  Logger.root.level = Level.FINEST;
+  Logger.root.onRecord.listen((LogRecord rec) {
+    print('[${rec.loggerName}] ${rec.level.name}: ${rec.time}: ${rec.message}');
+  });
+
   var result = jpredicate.json(testDocument, {
     'op' : 'matches',
     'path' : '/level1_0',
     'value' : '[\\w\\s]*'
-  });
+  }, debug: true);
 
   print(result);
 }
